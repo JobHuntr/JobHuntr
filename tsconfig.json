@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "jsx": "react",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+  },
+  "include": ["src/**/*"]
+  // "files": [
+  //   // "./src/types.ts",
+  //   //"server/server.js",
+  //   "./src/index.ts",
+  //   // "./src/server/playerController.ts",
+  //   "./src/App.tsx",
+  //   "./src/components/LoginPage.tsx",
+  //   // "./src/components/Box.tsx",
+  //   // "./src/components/Row.tsx"
+  // ]
+}

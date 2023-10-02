@@ -1,0 +1,34 @@
+const db = require('../models/jobHunterModels')
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
+
+
+const userController = {};
+
+userController.createUser = async (req, res, next) => {
+  try{
+    const person = 'INSERT INTO users(username, password) VALUES ($1, $2)'
+    const values = ['John', '12345']
+    const result = await db.query(person, values)
+    console.log('results: ', result)
+    return next();
+  }catch(err) {
+    console.log(`Error in UserController.createUser, Error: ${err}`);
+    return next(err);
+  } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = userController;
