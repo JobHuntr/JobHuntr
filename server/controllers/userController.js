@@ -112,7 +112,6 @@ try{
   await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, success) => {
     if(err){
       console.log('Token did not match the ACCESS_TOKEN_SECRET');
-      res.locals.isLoggedIn = false;
       }else{
       console.log('Token matches ACCES_TOKEN_SECRET');
       res.locals.isLoggedIn = true;
