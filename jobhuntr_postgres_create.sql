@@ -1,7 +1,7 @@
 -- users table
 CREATE TABLE public.users (
   "_id" serial PRIMARY KEY,
-  "username" varchar(255) NOT NULL,
+  "username" varchar(255) NOT NULL UNIQUE,
   "password" varchar(255) NOT NULL
 );
 
@@ -21,3 +21,4 @@ CREATE TABLE public.jobs (
   FOREIGN KEY ("user_id") REFERENCES public.users("_id")
 );
 
+--psql -d postgres://axhrluml:m5WdHydoURU3AH2xehgn-CU5wmtqY2Iz@peanut.db.elephantsql.com/axhrluml -f jobhuntr_postgres_create.sql
