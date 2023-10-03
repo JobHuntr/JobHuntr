@@ -5,7 +5,7 @@ const cors = require('cors')
 const userRouter = require('./routes/userRouter.js');
 
 
-//psql -d postgres://axhrluml:m5WdHydoURU3AH2xehgn-CU5wmtqY2Iz@peanut.db.elephantsql.com/axhrluml -f jobhuntr_postgres_create.sql
+
 
 // Initialize Express
 const app = express();
@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
       ('Express error handler caught unknown middleware error. Error: ', err),
     status: 400,
     //basic message to user
-    message: { err: 'An error occurred' },
+    message: { err: `An error has occured ${err}` },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   //send error message to frontend
