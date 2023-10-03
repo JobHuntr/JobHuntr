@@ -5,16 +5,16 @@ import axios from "axios";
 type responseData = {
   success: boolean;
 }
-
+// I added the types in for each state below
 const NewJob = () => {
-  const [company, setCompany] = useState('');
-  const [position, setPosition] = useState('');
-  const [salary, setSalary] = useState(0);
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
-  const [followUp, setFollowUp] = useState('');
+  const [company, setCompany] = useState<string>('');
+  const [position, setPosition] = useState<string>('');
+  const [salary, setSalary] = useState<number>(0);
+  const [location, setLocation] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [followUp, setFollowUp] = useState<string>('');
   // a state variable to indicate if this is for editing or adding
-  const [edit, setEdit] = useState(true);
+  const [edit, setEdit] = useState<boolean>(true);
 
   const submitJob = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault

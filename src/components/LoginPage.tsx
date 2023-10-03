@@ -13,6 +13,8 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [signup, setSignup] = useState<boolean>(false);
 
+  // maybe add in functionality here to give you an error if you don't include a username/password 
+  // also another error if your username and password don't match (pop up message)
   const clickLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
