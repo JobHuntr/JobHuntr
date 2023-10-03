@@ -47,7 +47,6 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
   
   return (
     <div>
-      <h2>Edit Job Application:</h2>
       <form onSubmit={(e) => updateJob(e)}>
         <div>
           <label htmlFor = "company">Company: </label>
