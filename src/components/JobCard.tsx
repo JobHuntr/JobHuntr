@@ -3,12 +3,14 @@ import { Outlet } from 'react-router-dom';
 import { Job } from './JobContainer';
 
 interface JobCardProps {
+  id: string;
   jobInfo: Job; // Assuming Job is the type for your job data
+  getClickId: (arg: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 
 // company position (average)salary location description
-const JobCard: React.FC<JobCardProps>= ({ jobInfo }) => {
+const JobCard: React.FC<JobCardProps>= ({ id, jobInfo, getClickId }) => {
   
 
   return (
@@ -32,8 +34,8 @@ const JobCard: React.FC<JobCardProps>= ({ jobInfo }) => {
         <span id = "description">{jobInfo.description}</span>
       </p>
       <div className = "buttonContainer">
-        <button>Edit</button>
-        <button>Delete</button>
+        <button id={id} onClick={(e) => getClickId(e)}>Edit</button>
+        <button id={id}>Delete</button>
       </div>
     </div>
   )
