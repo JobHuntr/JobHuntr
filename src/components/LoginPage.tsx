@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 type responseData = {
-  success: boolean;
+  data: boolean;
 }
 
 
@@ -13,8 +13,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>("");
   const [signup, setSignup] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
-
-
 
   const checkLogInStatus = async() => {
     try{
@@ -33,6 +31,8 @@ const LoginPage = () => {
   }
 
 
+  // maybe add in functionality here to give you an error if you don't include a username/password 
+  // also another error if your username and password don't match (pop up message)
   const clickLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -55,22 +55,23 @@ const LoginPage = () => {
   const clickSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response: responseData = await axios.post('/user/signup', {username: username, password: password}, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      // expect a boolean value
+      // const response: responseData = await axios.post('/user/signup', {username: username, password: password}, {
+      //   withCredentials: true,
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   }
+      // })
+      if (true) setSignup(false);
     }
     catch (error){
       console.log(error)
     }
   }
 
-  const goToHome = () => {
-    navigate("/Home");
-  }
+  // const signupPage = () => {
+  //   setSignup(true);
+  //   //navigate("/");
+  // }
   
   return (
     <div>
@@ -83,7 +84,7 @@ const LoginPage = () => {
           <button>Submit</button>
         </form>
         <div>
-          <button onClick={goToHome}>Go To Home</button>
+          <button onClick={() => setSignup(true)}>Create New Account</button>
         </div>
       </div>
       )}

@@ -106,8 +106,7 @@ userController.verifyToken = async (req, res, next) => {
 console.log('in verifyToken');
 try{
   res.locals.isLoggedIn = false;
-  // const token = req.cookies.token;
-  const token = 'wrong';
+  const token = req.cookies.token;
   console.log('token:', token);
 
   await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, success) => {
