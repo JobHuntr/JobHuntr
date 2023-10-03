@@ -12,7 +12,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cookieParser())
-app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.static(path.join(__dirname, '../build')));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded

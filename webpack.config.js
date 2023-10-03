@@ -52,7 +52,7 @@ module.exports = {
     },
   },
 
-  //sdsd
+
   
   plugins: [
     new HtmlWebPackPlugin({
