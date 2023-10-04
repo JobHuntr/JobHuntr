@@ -45,7 +45,7 @@ const LoginPage = () => {
           'Content-Type': 'application/json',
         }
       })
-      console.log("response", response)
+      console.log("response in Login Page", response)
       // expect a boolean value
       if (response.data) {
         navigate('/Home');

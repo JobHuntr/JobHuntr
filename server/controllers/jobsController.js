@@ -20,7 +20,7 @@ const formattedDate = () => {
 
 jobsController.getJobs = async (req, res, next) => {
   try{
-    const username = 'nhat'
+    const username = req.cookies['username']
 
     const value = [username];
     const findJobs = 'SELECT * FROM "jobs" WHERE user_username = $1'
@@ -39,15 +39,18 @@ jobsController.getJobs = async (req, res, next) => {
 }
 
 jobsController.addJobs = async (req, res, next) => {
+  console.log('in add job');
   try{
-    const username = 'nhat'
+    const username = req.cookies['username']
+    console.log('username: ', username);
     const date = formattedDate();
-    const { company, position, salary, location, description, followUp } = req.body;
-    console.log(followUp);
-    const value = [username, company, position, salary, location, date, description, followUp];
+    const { company_name, position, salary, location, description, follow_up } = req.body;
+    console.log(follow_up);
+    console.log('req.body: ', req.body);
+    const value = [username, company_name, position, salary, location, date, description, follow_up];
     const job = 'INSERT INTO jobs(user_username, company_name, position, salary, location, date_applied, description, follow_up) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
     const results = await db.query(job, value);
-    // console.log(results);
+    console.log(results);
 
     return next();
 
@@ -55,16 +58,16 @@ jobsController.addJobs = async (req, res, next) => {
     return next({
       log: `There was a problem in jobsController.addJobs. Error: ${err}`,
       status: 400,
-      message: 'There was a problem adding your job'
+      message: `There was a problem adding your job ${err}`
     })
   }
 }
 
 jobsController.updateJob = async (req, res, next) => {
   try{
-    const username = 'nhat'
-    const { id, company, position, salary, location, description, followUp } = req.body;
-    const value = [company, position, salary, location, description, followUp];
+    const username = req.cookies['username']
+    const { id, company, position, salary, location, description, follow_up } = req.body;
+    const value = [company, position, salary, location, description, follow_up];
     const job = `UPDATE jobs SET company_name = $1, position = $2, salary = $3, location = $4, description = $5, follow_up = $6 WHERE _id = ${id}`
     const results = await db.query(job, value)
     console.log(results);
@@ -81,7 +84,7 @@ jobsController.updateJob = async (req, res, next) => {
 
 jobsController.deleteJob = async (req, res, next) => {
   try{
-    const username = 'nhat'
+    const username = req.cookies['username']
     const { id } = req.body;
     const deleteJob = `DELETE FROM jobs WHERE _id = ${id}`
     const results = await db.query(deleteJob)

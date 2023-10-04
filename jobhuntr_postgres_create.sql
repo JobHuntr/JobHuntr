@@ -18,7 +18,7 @@ CREATE TABLE public.jobs (
   "date_applied" varchar(255),
   "description" varchar(255),
   "follow_up" boolean,
-  "heard_back" boolean,
+  "heardBack" boolean,
   FOREIGN KEY ("user_username") REFERENCES public.users("username")
 );
 

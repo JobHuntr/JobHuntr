@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from 'react-router-dom';
 import JobCard from './JobCard';
 import EditJob from './EditJob';
 import axios from "axios"
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // strech: date or how long since application
 export type Job = {
   id: string;
-  company: string;
+  company_name: string;
+  date_applied: string;
   position: string;
   salary: number;
   location: string;
   description: string;
-  followUp: string;
+  follow_up: string;
   getClickId: () => void;
 }
 
@@ -21,27 +22,27 @@ const JobContainer = () => {
   const [currentJob, setCurrentJob] = useState<Job>();
 
   const getList = async () => {
-    // const jobListData: Response = await axios.get('/jobs/list', {
-    //   withCredentials: true,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
-    const jobListData = [{company: 'abc', position: 'swe', salary: 10000, location: 'NY', description: 'something'}, 
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'}]
-    setJobList(jobListData);
+    const jobListData: any = await axios.get('/jobs/list', {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    console.log('jobListData: ', jobListData.data);
+    setJobList(jobListData.data);
   }
+  useEffect(() => {
+    getList()
+  }, [])
 
   const getClickId = (e: React.MouseEvent<HTMLButtonElement>) => {
     //setEditID(e.target.id);
-    setCurrentJob(jobList[parseInt(e.currentTarget.id)]);
     setEdit(true);
+    setCurrentJob(jobList[parseInt(e.currentTarget.id)]);
+
   }
 
-  useEffect(() => {getList()}, [])
+
 
   const listOfCards: JSX.Element[] = [];
 
@@ -49,10 +50,8 @@ const JobContainer = () => {
     const jobInfo = jobList[i] as Job
     listOfCards.push(
       <div className="col-4">
-        <JobCard id = {`${i}`} jobInfo = {jobInfo} getClickId={getClickId}/>
+        <JobCard id = {jobInfo.id} jobInfo = {jobInfo} getClickId={getClickId} edit = {edit}/>
       </div>)
-    }
-
 
   return (
     <div>
@@ -64,17 +63,9 @@ const JobContainer = () => {
         </div>
       </div>
       )}
-      {edit && (
-      <div className = "bg-dark-subtle p-3">
-      <h2 style={{ textAlign: 'center', fontSize: '36px' }} className = "text-secondary">Edit Job Application:</h2>
-      <div className = "bg-dark-subtle">
-        <EditJob currentJob = {currentJob}/>
-      </div>
-    </div>
-      )}
     </div>
   )
-
+}
 }
 
 export default JobContainer;

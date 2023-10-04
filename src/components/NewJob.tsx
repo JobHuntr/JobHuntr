@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Outlet } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 type responseData = {
   success: boolean;
 }
 // I added the types in for each state below
 const NewJob = () => {
+  const navigate = useNavigate();
   const [company, setCompany] = useState<string>('');
   const [position, setPosition] = useState<string>('');
   const [salary, setSalary] = useState<number>(0);
@@ -18,24 +20,34 @@ const NewJob = () => {
   // const [edit, setEdit] = useState<boolean>(true);
 
   const submitJob = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault
+    event.preventDefault()
+
+    let follow_up: boolean = true
+    if (followUp === 'false') {
+      follow_up = false;
+    }
+
     const body = {
-      company: company,
+      company_name: company,
       position: position,
       salary: salary,
       location: location,
       description: description,
-      // need to convert this to boolean in backend
-      followUp: followUp,
+      follow_up: follow_up,
       heardBack: heardBack
     }
+    console.log('body: ', body)
     try {
-      const response: responseData = await axios.post('', body, {
+      const response: any = await axios.post('/jobs/add', body, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         }
       })
+  
+      navigate('/Home') 
+ 
+       
     }
     catch(err) {
       console.log(err);

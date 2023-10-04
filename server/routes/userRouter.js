@@ -8,10 +8,10 @@ router.post('/signup', userController.createUser, userController.createToken, (r
   res.status(200).send(true);
 })
 
-router.post('/login', userController.verifyToken, userController.verifyUser, userController.createToken, (req, res) => {
+router.post('/login', userController.verifyUser, userController.createToken, (req, res) => {
   res.status(200).send(true);
 })
-
+//userController.verifyToken, 
 
 
 
