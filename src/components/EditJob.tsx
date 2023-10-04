@@ -16,8 +16,9 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
   const [location, setLocation] = useState<string>(currentJob.location);
   const [description, setDescription] = useState<string>(currentJob.description);
   const [followUp, setFollowUp] = useState<string>(currentJob.followUp);
+  const [heardBack, setHeardBack] = useState<string>('');
   // a state variable to indicate if this is for editing or adding
-  const [edit, setEdit] = useState<boolean>(true);
+  // const [edit, setEdit] = useState<boolean>(true);
   
   
   const updateJob = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +30,8 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
       location: location,
       description: description,
       // need to convert this to boolean in backend
-      followUp: followUp
+      followUp: followUp,
+      heardBack: heardBack
     }
     try {
       const response: responseData = await axios.patch('', body, {
@@ -46,37 +48,44 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
   
   
   return (
-    <div>
-      <form onSubmit={(e) => updateJob(e)}>
-        <div>
-          <label htmlFor = "company">Company: </label>
-          <input id = "company" type="text" placeholder="Company" onChange={ (e) => {setCompany(e.target.value)} } value = {company}></input>
+    <div className = "bg-dark-subtle p-3" >
+      <form className = "bg-dark-subtle mt-5 mb-5 ms-5 me-5" onSubmit={(e) => updateJob(e)}>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor = "company" className="text-success form-label">Company: </label>
+          <input id = "company" type="text" className="form-control" placeholder="Company" onChange={ (e) => {setCompany(e.target.value)} } value = {company}></input>    
         </div>
-        <div>
-          <label htmlFor = "position">Position: </label>
-          <input id = "position" type="text" placeholder="Position" onChange={ (e) => {setPosition(e.target.value)} } value = {position}></input>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor = "position" className="text-success form-label">Position: </label>
+          <input id = "position" type="text" className="form-control" placeholder="Position" onChange={ (e) => {setPosition(e.target.value)} } value = {position}></input>
         </div>
-        <div>
-          <label htmlFor = "salary"> Salary: </label>
-          <input id = "salary" type="text" placeholder="Salary" onChange={ (e) => {setSalary( parseInt(e.target.value) )} } value = {salary}></input>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor = "salary" className="text-success form-label"> Salary: </label>
+          <input id = "salary" type="text" className="form-control" placeholder="Salary" onChange={ (e) => {setSalary( parseInt(e.target.value) )} } value = {salary}></input>
         </div>
-        <div>
-          <label htmlFor = "location"> Location: </label>
-          <input id = "location" type="text" placeholder="Location" onChange={ (e) => {setLocation(e.target.value)} } value = {location}></input>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor = "location" className="text-success form-label"> Location: </label>
+          <input id = "location" type="text" className="form-control" placeholder="Location" onChange={ (e) => {setLocation(e.target.value)} } value = {location}></input>
         </div>
-        <div>
-          <label htmlFor = "description"> Description: </label>
-          <input id = "description" type="text" placeholder="Description" onChange={ (e) => {setDescription(e.target.value)} } value = {description}></input>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor = "description" className="text-success form-label"> Description: </label>
+          <input id = "description" type="text" className="form-control" placeholder="Description" onChange={ (e) => {setDescription(e.target.value)} } value = {description}></input>
         </div>
-        <div>
-          <label htmlFor="followup">Follow up? (Y/N)</label>
-          <select id = "followup" placeholder="Choose One" onChange={ (e) => {setFollowUp(e.target.value)} }>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor="followup" className="text-success form-label">Follow up? (Y/N)</label>
+          <select id = "followup" placeholder="Choose One" className="form-select" onChange={ (e) => {setFollowUp(e.target.value)} }>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label style = {{ fontSize: '20px'}} htmlFor="heard-back" className="text-success form-label">Heard Back? (Y/N)</label>
+          <select id = "heard-back" placeholder="Choose One" className="form-select" onChange={ (e) => {setHeardBack(e.target.value)} }>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
         </div>
         <div>
-          <input type="submit"></input>
+          <input type="submit" className="btn btn-info text-white"></input>
         </div>
       </form>
     </div>

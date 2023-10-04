@@ -17,7 +17,7 @@ export type Job = {
 
 const JobContainer = () => {
   const [jobList, setJobList] = useState([]);
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [currentJob, setCurrentJob] = useState<Job>();
 
   const getList = async () => {
@@ -27,8 +27,10 @@ const JobContainer = () => {
     //     'Content-Type': 'application/json',
     //   }
     // })
-    // console.log(jobListData);
-    const jobListData = [{company: 'abc', position: 'swe', salary: 10000, location: 'NY', description: 'something', followUp: false}, 
+    const jobListData = [{company: 'abc', position: 'swe', salary: 10000, location: 'NY', description: 'something'}, 
+    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
+    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
+    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
     {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'}]
     setJobList(jobListData);
   }
@@ -45,24 +47,27 @@ const JobContainer = () => {
 
   for (let i=0; i<jobList.length; i++) {
     const jobInfo = jobList[i] as Job
-    listOfCards.push(<JobCard id = {`${i}`} jobInfo = {jobInfo} getClickId={getClickId}/>)
-  }
+    listOfCards.push(
+      <div className="col-4">
+        <JobCard id = {`${i}`} jobInfo = {jobInfo} getClickId={getClickId}/>
+      </div>)
+    }
 
 
   return (
     <div>
       {!edit && (
-      <div>
-        <h2>Current Job Applications</h2>
-        <div>
+      <div className="grid text-center bg-dark-subtle p-3">
+        <h2 className = "text-secondary">Current Job Applications: </h2>
+        <div className= "row gy-5" >
           {listOfCards}
         </div>
       </div>
       )}
       {edit && (
-      <div>
-      <h2>Edit Job Application:</h2>
-      <div>
+      <div className = "bg-dark-subtle p-3">
+      <h2 style={{ textAlign: 'center', fontSize: '36px' }} className = "text-secondary">Edit Job Application:</h2>
+      <div className = "bg-dark-subtle">
         <EditJob currentJob = {currentJob}/>
       </div>
     </div>

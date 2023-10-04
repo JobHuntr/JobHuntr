@@ -14,28 +14,21 @@ const JobCard: React.FC<JobCardProps>= ({ id, jobInfo, getClickId }) => {
   
 
   return (
-    <div className="jobCard">
-      <label htmlFor = "company">Company: </label>
-      <span id = "company">{jobInfo.company}</span>
-      <p>
-        <label htmlFor = "position">Position: </label>
-        <span id = "position">{jobInfo.position}</span>
-      </p>
-      <p>
-        <label htmlFor = "salary">Average Salary: </label>
-        <span id = "salary">{jobInfo.salary}</span>
-      </p>
-      <p>
-        <label htmlFor = "location">Location: </label>
-        <span id = "location">{jobInfo.location}</span>
-      </p>
-      <p>
-        <label htmlFor = "description">Description: </label>
-        <span id = "description">{jobInfo.description}</span>
-      </p>
+    <div className="card mb-2 bg-light" style={{width: '18rem'}}>
+
+      <div className="card-body">
+        <h5 className="card-title text-success">{jobInfo.company}</h5>
+        <p className="card-text">{jobInfo.description}</p>
+      </div>
+
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">Position: {jobInfo.position}</li>
+        <li className="list-group-item">Average Salary: {jobInfo.salary}</li>
+        <li className="list-group-item">Location: {jobInfo.location}</li>
+      </ul>
       <div className = "buttonContainer">
-        <button id={id} onClick={(e) => getClickId(e)}>Edit</button>
-        <button id={id}>Delete</button>
+        <button className = "btn btn-info text-white mt-2 mr-2 ml-2 mb-2" id={id} onClick={(e) => getClickId(e)}>Edit</button>
+        <button className = "btn btn-danger mt-2 mr-2 ml-2 mb-2" id={id}>Delete</button>
       </div>
     </div>
   )
