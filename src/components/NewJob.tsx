@@ -20,7 +20,7 @@ const NewJob = () => {
   // const [edit, setEdit] = useState<boolean>(true);
 
   const submitJob = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault
+    event.preventDefault()
 
     let follow_up: boolean = true
     if (followUp === 'false') {
