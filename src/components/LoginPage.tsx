@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../../node_modules/bootstrap/scss/bootstrap";
 
 type responseData = {
   data: boolean;
@@ -74,27 +75,27 @@ const LoginPage = () => {
   // }
   
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center vh-100" style={{ fontSize: '24px'}}>
       {!signup && (
-      <div id='login'>
-        <h2> Login </h2>
-        <form onSubmit={(e) => clickLogin(e)}>
-          <input type="text" placeholder="Username" value={username} onChange= {(e) => setUsername(e.target.value)}></input>
-          <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-          <button>Submit</button>
+      <div style={{ transform: 'scale(1.3)' }} className="mb-3" id='login' >
+        <h2 style={{ textAlign: 'center', fontSize: '36px' }}> Login </h2>
+        <form onSubmit={(e) => clickLogin(e)} className="d-flex flex-column justify-content-center align-items-center" >
+          <input className = "form-control w-100 mb-2 ps-4" type="text" placeholder="Username" value={username} onChange= {(e) => setUsername(e.target.value)}></input>
+          <input className = "form-control w-100 mb-2 ps-4" type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+          <button className="btn btn-primary mb-2">Submit</button>
         </form>
-        <div>
-          <button onClick={() => setSignup(true)}>Create New Account</button>
+        <div className="d-flex flex-column align-items-center">
+          <button className="btn btn-primary mb-2" onClick={() => setSignup(true)}>Create New Account</button>
         </div>
       </div>
       )}
       {signup && (
-      <div id='signup'>
-        <h2> Signup </h2>
+      <div style={{ transform: 'scale(1.3)' }} className="mb-3" id='signup'>
+        <h2 style={{ textAlign: 'center', fontSize: '36px' }}> Signup </h2>
         <form onSubmit={(e) => {clickSignup(e)}}>
-          <input type="text" placeholder="Username" value={username} onChange= {(e) => setUsername(e.target.value)}></input>
-          <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-          <button>Submit</button>
+          <input className = "form-control w-100 mb-2 p-2" type="text" placeholder="Username" value={username} onChange= {(e) => setUsername(e.target.value)}></input>
+          <input className = "form-control w-100 mb-2 p-2" type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+          <button className="btn btn-primary" >Submit</button>
         </form>
       </div>
       )}
