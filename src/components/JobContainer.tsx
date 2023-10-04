@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from 'react-router-dom';
 import JobCard from './JobCard';
 import EditJob from './EditJob';
 import axios from "axios"
 // strech: date or how long since application
 export type Job = {
   id: string;
-  company: string;
+  company_name: string;
+  date_applied: string;
   position: string;
   salary: number;
   location: string;
   description: string;
-  followUp: string;
+  follow_up: string;
   getClickId: () => void;
 }
 
@@ -21,19 +21,18 @@ const JobContainer = () => {
   const [currentJob, setCurrentJob] = useState<Job>();
 
   const getList = async () => {
-    // const jobListData: Response = await axios.get('/jobs/list', {
-    //   withCredentials: true,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
-    const jobListData = [{company: 'abc', position: 'swe', salary: 10000, location: 'NY', description: 'something'}, 
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'},
-    {company: 'abcasda', position: 'swe', salary: 20000, location: 'NY', description: 'somethingdasda'}]
-    setJobList(jobListData);
+    const jobListData: any = await axios.get('/jobs/list', {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    console.log('jobListData: ', jobListData.data);
+    setJobList(jobListData.data);
   }
+  useEffect(() => {
+    getList()
+  }, [])
 
   const getClickId = (e: React.MouseEvent<HTMLButtonElement>) => {
     //setEditID(e.target.id);
@@ -41,7 +40,7 @@ const JobContainer = () => {
     setEdit(true);
   }
 
-  useEffect(() => {getList()}, [])
+
 
   const listOfCards: JSX.Element[] = [];
 
@@ -49,7 +48,7 @@ const JobContainer = () => {
     const jobInfo = jobList[i] as Job
     listOfCards.push(
       <div className="col-4">
-        <JobCard id = {`${i}`} jobInfo = {jobInfo} getClickId={getClickId}/>
+        <JobCard id = {jobInfo.id} jobInfo = {jobInfo} getClickId={getClickId}/>
       </div>)
     }
 

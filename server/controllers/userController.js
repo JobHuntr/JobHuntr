@@ -82,9 +82,6 @@ userController.verifyUser = async (req, res, next) => {
 userController.createToken = async (req, res, next) => {
   console.log('in createToken');
   try{
-    if(res.locals.isLoggedIn === true){
-      return next();
-    }
     const values = [res.locals.username]
     console.log('username from value: ', values);
     const findUser = 'SELECT username FROM "users" WHERE username = $1'

@@ -10,13 +10,14 @@ type responseData = {
 }
 
 const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
-  const [company, setCompany] = useState<string>(currentJob.company);
+  const [company, setCompany] = useState<string>(currentJob.company_name);
   const [position, setPosition] = useState<string>(currentJob.position);
   const [salary, setSalary] = useState<number>(currentJob.salary);
   const [location, setLocation] = useState<string>(currentJob.location);
   const [description, setDescription] = useState<string>(currentJob.description);
-  const [followUp, setFollowUp] = useState<string>(currentJob.followUp);
+  const [followUp, setFollowUp] = useState<string>(currentJob.follow_up);
   const [heardBack, setHeardBack] = useState<string>('');
+  const [tableId, setTableId] = useState<string>(currentJob.id);
   // a state variable to indicate if this is for editing or adding
   // const [edit, setEdit] = useState<boolean>(true);
   
@@ -30,7 +31,7 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
       location: location,
       description: description,
       // need to convert this to boolean in backend
-      followUp: followUp,
+      follow_up: followUp,
       heardBack: heardBack
     }
     try {
@@ -71,8 +72,8 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
           <input id = "description" type="text" className="form-control" placeholder="Description" onChange={ (e) => {setDescription(e.target.value)} } value = {description}></input>
         </div>
         <div className="mb-3">
-          <label style = {{ fontSize: '20px'}} htmlFor="followup" className="text-success form-label">Follow up? (Y/N)</label>
-          <select id = "followup" placeholder="Choose One" className="form-select" onChange={ (e) => {setFollowUp(e.target.value)} }>
+          <label style = {{ fontSize: '20px'}} htmlFor="follow_up" className="text-success form-label">Follow up? (Y/N)</label>
+          <select id = "follow_up" placeholder="Choose One" className="form-select" onChange={ (e) => {setFollowUp(e.target.value)} }>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>

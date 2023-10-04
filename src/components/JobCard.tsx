@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from 'react-router-dom';
 import { Job } from './JobContainer';
 
 interface JobCardProps {
@@ -17,7 +16,7 @@ const JobCard: React.FC<JobCardProps>= ({ id, jobInfo, getClickId }) => {
     <div className="card mb-2 bg-light" style={{width: '18rem'}}>
 
       <div className="card-body">
-        <h5 className="card-title text-success">{jobInfo.company}</h5>
+        <h5 className="card-title text-success">{jobInfo.company_name}</h5>
         <p className="card-text">{jobInfo.description}</p>
       </div>
 
@@ -25,6 +24,7 @@ const JobCard: React.FC<JobCardProps>= ({ id, jobInfo, getClickId }) => {
         <li className="list-group-item">Position: {jobInfo.position}</li>
         <li className="list-group-item">Average Salary: {jobInfo.salary}</li>
         <li className="list-group-item">Location: {jobInfo.location}</li>
+        <li className="list-group-item">Date Applied: {jobInfo.date_applied}</li>
       </ul>
       <div className = "buttonContainer">
         <button className = "btn btn-info text-white mt-2 mr-2 ml-2 mb-2" id={id} onClick={(e) => getClickId(e)}>Edit</button>
