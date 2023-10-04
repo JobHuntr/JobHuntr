@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import JobCard from './JobCard';
 import EditJob from './EditJob';
 import axios from "axios"
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // strech: date or how long since application
 export type Job = {
   id: string;
@@ -36,8 +37,9 @@ const JobContainer = () => {
 
   const getClickId = (e: React.MouseEvent<HTMLButtonElement>) => {
     //setEditID(e.target.id);
-    setCurrentJob(jobList[parseInt(e.currentTarget.id)]);
     setEdit(true);
+    setCurrentJob(jobList[parseInt(e.currentTarget.id)]);
+
   }
 
 
@@ -48,10 +50,8 @@ const JobContainer = () => {
     const jobInfo = jobList[i] as Job
     listOfCards.push(
       <div className="col-4">
-        <JobCard id = {jobInfo.id} jobInfo = {jobInfo} getClickId={getClickId}/>
+        <JobCard id = {jobInfo.id} jobInfo = {jobInfo} getClickId={getClickId} edit = {edit}/>
       </div>)
-    }
-
 
   return (
     <div>
@@ -63,17 +63,9 @@ const JobContainer = () => {
         </div>
       </div>
       )}
-      {edit && (
-      <div className = "bg-dark-subtle p-3">
-      <h2 style={{ textAlign: 'center', fontSize: '36px' }} className = "text-secondary">Edit Job Application:</h2>
-      <div className = "bg-dark-subtle">
-        <EditJob currentJob = {currentJob}/>
-      </div>
-    </div>
-      )}
     </div>
   )
-
+}
 }
 
 export default JobContainer;

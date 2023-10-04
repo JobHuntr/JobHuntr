@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { Job } from "./JobContainer"
 import axios from "axios";
 
@@ -10,6 +11,7 @@ type responseData = {
 }
 
 const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
+  const navigate = useNavigate();
   const [company, setCompany] = useState<string>(currentJob.company_name);
   const [position, setPosition] = useState<string>(currentJob.position);
   const [salary, setSalary] = useState<number>(currentJob.salary);
@@ -17,30 +19,35 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
   const [description, setDescription] = useState<string>(currentJob.description);
   const [followUp, setFollowUp] = useState<string>(currentJob.follow_up);
   const [heardBack, setHeardBack] = useState<string>('');
-  const [tableId, setTableId] = useState<string>(currentJob.id);
+  //const [tableId, setTableId] = useState<string>(id);
   // a state variable to indicate if this is for editing or adding
   // const [edit, setEdit] = useState<boolean>(true);
   
   
   const updateJob = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault
+    event.preventDefault();
+
+    let follow_up: boolean = true
+    if (followUp === 'false') {
+      follow_up = false;
+    }
     const body = {
-      company: company,
+      company_name: company,
       position: position,
       salary: salary,
       location: location,
       description: description,
-      // need to convert this to boolean in backend
       follow_up: followUp,
       heardBack: heardBack
     }
     try {
-      const response: responseData = await axios.patch('', body, {
+      const response: responseData = await axios.patch('/jobs/update', body, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         }
       })
+      navigate('/Home');
     }
     catch(err) {
       console.log(err);
@@ -52,8 +59,8 @@ const EditJob: React.FC<EditJobProps> = ({ currentJob }) => {
     <div className = "bg-dark-subtle p-3" >
       <form className = "bg-dark-subtle mt-5 mb-5 ms-5 me-5" onSubmit={(e) => updateJob(e)}>
         <div className="mb-3">
-          <label style = {{ fontSize: '20px'}} htmlFor = "company" className="text-success form-label">Company: </label>
-          <input id = "company" type="text" className="form-control" placeholder="Company" onChange={ (e) => {setCompany(e.target.value)} } value = {company}></input>    
+          <label style = {{ fontSize: '20px'}} htmlFor = "company_name" className="text-success form-label">Company: </label>
+          <input id = "company_name" type="text" className="form-control" placeholder="Company_name" onChange={ (e) => {setCompany(e.target.value)} } value = {company}></input>    
         </div>
         <div className="mb-3">
           <label style = {{ fontSize: '20px'}} htmlFor = "position" className="text-success form-label">Position: </label>
