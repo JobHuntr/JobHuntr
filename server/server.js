@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const userRouter = require('./routes/userRouter.js');
+const jobsRouter = require('./routes/jobsRouter.js');
 
 
 
@@ -18,6 +19,7 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use('/user', userRouter)
+app.use('/jobs', jobsRouter)
 
 
 

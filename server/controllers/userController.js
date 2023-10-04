@@ -96,6 +96,7 @@ userController.createToken = async (req, res, next) => {
       maxAge: (60 * 60 * 1000),
       httpOnly: true
     })
+    await res.cookie('username', res.locals.username)
     return next()
   } catch(err){
     return next(err);
