@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Outlet } from 'react-router-dom';
 import JobCard from './JobCard';
 import EditJob from './EditJob';
-
+import axios from "axios"
 // strech: date or how long since application
 export type Job = {
   id: string;
@@ -21,7 +21,7 @@ const JobContainer = () => {
   const [currentJob, setCurrentJob] = useState<Job>();
 
   const getList = async () => {
-    // const jobListData: responseData = await axios.get('', {
+    // const jobListData: Response = await axios.get('/jobs/list', {
     //   withCredentials: true,
     //   headers: {
     //     'Content-Type': 'application/json',

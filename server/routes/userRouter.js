@@ -12,9 +12,7 @@ router.post('/login', userController.verifyToken, userController.verifyUser, use
   res.status(200).send(true);
 })
 
-// router.get('/isLoggedIn', userController.verifyToken, (req, res) => {
-//   res.status(200).send(res.locals.isLoggedIn);
-// })
+
 
 
 
